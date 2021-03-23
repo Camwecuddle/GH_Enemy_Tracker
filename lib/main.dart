@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gh_enemy_tracker/start.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,8 +10,33 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Gloomhaven Enemy Tracker',
       theme: ThemeData(
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w100,
+            fontSize: 100,
+          ),
+          headline2: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w200,
+            fontSize: 50,
+          ),
+          headline3: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 50,
+          ),
+          headline4: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 40,
+          ),
+        ),
+
+        buttonTheme: ButtonThemeData(),
+
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -26,7 +52,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Start(),
     );
   }
 }

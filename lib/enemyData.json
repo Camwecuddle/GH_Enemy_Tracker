@@ -1,0 +1,29 @@
+{
+    "enemies": {
+        "Toadman Scout": {
+            "flying": false,
+            "level": {
+                "0": {
+                    "normal": {
+                        "health": 10,
+                        "movement": 3,
+                        "range": 0,
+                        "attack": 3,
+                        "immunities": ["poison", "wound"]
+                    },
+                    "elite": {
+                        "health": 11,
+                        "movement": 4,
+                        "range": 0,
+                        "attack": 4,
+                        "immunities": ["poison", "wound"]
+                    }
+                    
+                }
+            }
+        },
+        "Brute": {
+
+        }
+    }
+}
