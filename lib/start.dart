@@ -23,21 +23,38 @@ class Start extends StatelessWidget {
           Expanded(
             child: Container(
               // color: Colors.blue,
-              child: Center(
-                child: TextButton(
-                  child: Text(
-                    'Start',
-                    style: Theme.of(context).textTheme.headline3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    child: Text(
+                      'New',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ScenarioLevel();
+                        }),
+                      )
+                    },
                   ),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return ScenarioLevel();
-                      }),
-                    )
-                  },
-                ),
+                  TextButton(
+                    child: Text(
+                      'Join',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ScenarioLevel();
+                        }),
+                      )
+                    },
+                  ),
+                ],
               ),
             ),
           )
