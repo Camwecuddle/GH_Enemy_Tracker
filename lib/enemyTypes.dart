@@ -130,7 +130,8 @@ class _EnemyTypesState extends State<EnemyTypes> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(left: 20),
+                        // margin: EdgeInsets.only(left: 20),
+
                         child: FutureBuilder(
                             future: enemyData,
                             builder: (BuildContext context,
@@ -138,32 +139,46 @@ class _EnemyTypesState extends State<EnemyTypes> {
                               var jsonEnemyData = jsonDecode(snapshot.data);
                               var smallEnemyList =
                                   jsonEnemyData['smallMonstersList'];
+                              var enemyNames = [];
 
-                              print(smallEnemyList);
-
-                              // var enemyNames = [];
-
-                              // smallEnemyList.forEach((element) {
-                              //   (element as Map<String, dynamic>)
-                              //       .forEach((key, value) {
-                              //     enemyNames.add(key);
-                              //   });
-                              // });
+                              smallEnemyList.forEach((element) {
+                                (element as Map<String, dynamic>)
+                                    .forEach((key, value) {
+                                  enemyNames.add(key);
+                                });
+                              });
 
                               if (snapshot.hasData) {
                                 return ListView.builder(
+                                    scrollDirection: Axis.horizontal,
                                     itemCount: snapshot == null
                                         ? 0
-                                        : smallEnemyList.length,
+                                        : enemyNames.length,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       // right now small enemis list is a list with one big json object that i can hopefully parse into smaller ones without having to go and put brackets around each enemy type
                                       // looks like it worked
 
-                                      return Image.network(
-                                        smallEnemyList[index]['picture'],
+                                      return Container(
+                                        padding: EdgeInsets.only(left: 20),
+                                        margin: EdgeInsets.only(right: 20),
                                         height: 200,
                                         width: 200,
+                                        child: Center(
+                                          child: AspectRatio(
+                                            aspectRatio: 1,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                fit: BoxFit.fitWidth,
+                                                alignment:
+                                                    FractionalOffset.center,
+                                                image: NetworkImage(
+                                                    '${smallEnemyList[0][enemyNames[index]]['picture']}'),
+                                              )),
+                                            ),
+                                          ),
+                                        ),
                                       );
                                     });
                               }

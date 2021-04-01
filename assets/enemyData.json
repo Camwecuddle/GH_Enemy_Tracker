@@ -3,7 +3,7 @@
   "smallMonstersList": [
     {
     "Ancient Artillery": {
-      "picture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F832462312357286417%2F&psig=AOvVaw2dYFloOZN4MUCtUZf3JmfD&ust=1617222848728000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIiiq-zu2O8CFQAAAAAdAAAAABAI",
+      "picture": "https://i.pinimg.com/564x/15/9b/2a/159b2a54a85a60567743261b0d5dd844.jpg",
       "maxEnemies": 6,
       "level": [
         {
@@ -153,7 +153,7 @@
       ]
     },
     "Bandit Archer": {
-      "picture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcephalofair.com%2Fpages%2Fgloomhaven-monster-spoilers&psig=AOvVaw3pe02oZ1CP9NmW-gQB7KAb&ust=1617222954256000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJivpZHv2O8CFQAAAAAdAAAAABAD",
+      "picture": "https://cdn.shopify.com/s/files/1/0281/0173/8555/files/Bandit-Archer-214x300.jpg",
       "maxEnemies": 6,
       "level": [
         {
@@ -303,7 +303,7 @@
       ]
     },
     "Bandit Guard": {
-      "picture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcephalofair.com%2Fpages%2Fgloomhaven-monster-spoilers&psig=AOvVaw0CoIrGzQde7CR-mTIHpILs&ust=1617222997060000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMiJmqXv2O8CFQAAAAAdAAAAABAD",
+      "picture": "https://cdn.shopify.com/s/files/1/0281/0173/8555/files/Bandit-Guard-214x300.jpg",
       "maxEnemies": 6,
       "level": [
         {
@@ -463,7 +463,7 @@
       ]
     },
     "Black Imp": {
-      "picture": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcephalofair.com%2Fpages%2Fgloomhaven-monster-spoilers&psig=AOvVaw1YkC3AU7K1Ak7fAtS88efB&ust=1617223032845000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCODAz7bv2O8CFQAAAAAdAAAAABAD",
+      "picture": "https://cdn.shopify.com/s/files/1/0281/0173/8555/files/Black-Imp-214x300.jpg",
       "maxEnemies": 10,
       "level": [
         {
