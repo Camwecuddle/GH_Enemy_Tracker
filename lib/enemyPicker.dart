@@ -30,7 +30,7 @@ class _EnemyPickerState extends State<EnemyPicker> {
   @override
   void initState() {
     super.initState();
-    enemyStats = [];
+    enemyStats = {};
     // I need to make an object that will store all the data from each enemy type
     // could be different objects for each enemy type or one object with all
     // health and status effects
@@ -77,8 +77,11 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) {
-                                    return EnemyStats(newJson[0], enemyNames[0],
-                                        enemyStats, updateEnemyStats);
+                                    return EnemyStats(
+                                        newJson[enemyNames[0]],
+                                        enemyNames[0],
+                                        enemyStats,
+                                        updateEnemyStats);
                                   }),
                                 )
                               },
@@ -95,8 +98,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[0]
-                                            [enemyNames[0]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[0]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -111,7 +114,18 @@ class _EnemyPickerState extends State<EnemyPicker> {
                       (enemyNames.length >
                               1) // If selected enemies at 0 is not null show the picture
                           ? GestureDetector(
-                              onTap: () => {},
+                              onTap: () => {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return EnemyStats(
+                                        newJson[enemyNames[1]],
+                                        enemyNames[1],
+                                        enemyStats,
+                                        updateEnemyStats);
+                                  }),
+                                )
+                              },
                               child: Container(
                                 // padding: EdgeInsets.only(left: 20),
                                 // margin: EdgeInsets.only(right: 20),
@@ -125,8 +139,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[1]
-                                            [enemyNames[1]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[1]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -160,8 +174,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[2]
-                                            [enemyNames[2]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[2]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -190,8 +204,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[3]
-                                            [enemyNames[3]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[3]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -225,8 +239,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[4]
-                                            [enemyNames[4]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[4]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -255,8 +269,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[5]
-                                            [enemyNames[5]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[5]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -290,8 +304,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[6]
-                                            [enemyNames[6]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[6]]['picture']),
                                       )),
                                     ),
                                   ),
@@ -320,8 +334,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                           image: DecorationImage(
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
-                                        image: NetworkImage(newJson[7]
-                                            [enemyNames[7]]['picture']),
+                                        image: NetworkImage(
+                                            newJson[enemyNames[7]]['picture']),
                                       )),
                                     ),
                                   ),

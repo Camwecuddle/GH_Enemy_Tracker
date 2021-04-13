@@ -44,10 +44,13 @@ class _EnemyTypesState extends State<EnemyTypes> {
 
   buildEnemyJson() {
     // takes the subset of selected enemy data from the larger json object
-    var newJson = [];
+    var newJson = {};
     selectedEnemies.forEach((enemyName) {
-      newJson.add({enemyName: this.parsedEnemyData[0][enemyName]});
+      newJson[enemyName] = this.parsedEnemyData[0][enemyName];
+      // newJson.add({enemyName: this.parsedEnemyData[0][enemyName]});
     });
+    print('NEWJSON');
+    print(newJson);
     return newJson;
   }
 
@@ -439,13 +442,14 @@ class _EnemyTypesState extends State<EnemyTypes> {
                                               aspectRatio: 1,
                                               child: Container(
                                                 decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                  fit: BoxFit.fitWidth,
-                                                  alignment:
-                                                      FractionalOffset.center,
-                                                  image: NetworkImage(
-                                                      '${this.parsedEnemyData[0][enemyNames[index]]['picture']}'),
-                                                )),
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.fitWidth,
+                                                    alignment:
+                                                        FractionalOffset.center,
+                                                    image: NetworkImage(
+                                                        '${this.parsedEnemyData[0][enemyNames[index]]['picture']}'),
+                                                  ),
+                                                ),
                                               ),
                                             ),
                                           ),

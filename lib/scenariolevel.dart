@@ -8,6 +8,19 @@ class ScenarioLevel extends StatefulWidget {
 }
 
 class _ScenarioLevelState extends State<ScenarioLevel> {
+  var selectedLevel;
+  var levelTexts = ['0', '1', '2', '3', '4', '5', '6', '7'];
+
+  void selectLevel(newLevel) {
+    setState(() {
+      if (selectedLevel != null)
+        levelTexts[selectedLevel] =
+            '$selectedLevel'; // Make sure a level has been selected before trying to use it
+      levelTexts[newLevel] = '~ $newLevel ~';
+      selectedLevel = newLevel;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,38 +46,62 @@ class _ScenarioLevelState extends State<ScenarioLevel> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    '0',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(0)},
+                    child: Text(
+                      levelTexts[0],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '1',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(1)},
+                    child: Text(
+                      levelTexts[1],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '2',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(2)},
+                    child: Text(
+                      levelTexts[2],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '3',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(3)},
+                    child: Text(
+                      levelTexts[3],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '4',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(4)},
+                    child: Text(
+                      levelTexts[4],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '5',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(5)},
+                    child: Text(
+                      levelTexts[5],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '6',
-                    style: Theme.of(context).textTheme.headline4,
+                  GestureDetector(
+                    onTap: () => {selectLevel(6)},
+                    child: Text(
+                      levelTexts[6],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
                   ),
-                  Text(
-                    '7',
-                    style: Theme.of(context).textTheme.headline4,
-                  )
+                  GestureDetector(
+                    onTap: () => {selectLevel(7)},
+                    child: Text(
+                      levelTexts[7],
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
                 ],
               ),
             ),
