@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class EnemyStats extends StatefulWidget {
+  var scenarioLevel;
   var enemyJson;
   var enemyStats;
   var updateEnemyStats;
   var enemyName;
 
-  EnemyStats(enemyJson, enemyName, enemyStats, updateEnemyStats) {
+  EnemyStats(
+      scenarioLevel, enemyJson, enemyName, enemyStats, updateEnemyStats) {
+    this.scenarioLevel = scenarioLevel;
     this.enemyJson = enemyJson;
     this.enemyStats = enemyStats;
     this.updateEnemyStats = updateEnemyStats;
@@ -15,22 +18,24 @@ class EnemyStats extends StatefulWidget {
   }
 
   @override
-  _EnemyStatsState createState() =>
-      _EnemyStatsState(enemyJson, enemyName, enemyStats, updateEnemyStats);
+  _EnemyStatsState createState() => _EnemyStatsState(
+      scenarioLevel, enemyJson, enemyName, enemyStats, updateEnemyStats);
 }
 
 class _EnemyStatsState extends State<EnemyStats> {
+  var scenarioLevel;
   var enemyJson;
   var enemyStats;
   var updateEnemyStats;
   var enemyName;
   var maxEnemies;
   var statusEffects;
-  var scenarioLevel;
   String normalAttributeString = '';
   String eliteAttributeString = '';
 
-  _EnemyStatsState(enemyJson, enemyName, enemyStats, updateEnemyStats) {
+  _EnemyStatsState(
+      scenarioLevel, enemyJson, enemyName, enemyStats, updateEnemyStats) {
+    this.scenarioLevel = scenarioLevel;
     this.enemyJson = enemyJson;
     this.enemyStats = enemyStats;
     this.updateEnemyStats = updateEnemyStats;
@@ -63,11 +68,7 @@ class _EnemyStatsState extends State<EnemyStats> {
     super.initState();
     maxEnemies = enemyJson['maxEnemies'];
     statusEffects = parseStatusEffects();
-    scenarioLevel =
-        4; // Hard coded for now because I haven't implemented picking a scenario level
     setAttributes();
-    // print('CAAAAAAAAAAM');
-    // print(enemyJson['level'][scenarioLevel]);
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gh_enemy_tracker/scenariolevel.dart';
 
 import 'enemyStats.dart';
 
@@ -6,23 +7,27 @@ import 'enemyStats.dart';
 class EnemyPicker extends StatefulWidget {
   var enemyNames;
   var newJson;
+  var scenarioLevel;
 
-  EnemyPicker(enemyNames, newJson) {
+  EnemyPicker(scenarioLevel, enemyNames, newJson) {
+    this.scenarioLevel = scenarioLevel;
     this.enemyNames = enemyNames;
     this.newJson = newJson;
   }
 
   @override
   _EnemyPickerState createState() =>
-      _EnemyPickerState(this.enemyNames, this.newJson);
+      _EnemyPickerState(this.scenarioLevel, this.enemyNames, this.newJson);
 }
 
 class _EnemyPickerState extends State<EnemyPicker> {
+  var scenarioLevel;
   var enemyNames;
   var newJson;
   var enemyStats;
 
-  _EnemyPickerState(enemyNames, newJson) {
+  _EnemyPickerState(scenarioLevel, enemyNames, newJson) {
+    this.scenarioLevel = scenarioLevel;
     this.enemyNames = enemyNames;
     this.newJson = newJson;
   }
@@ -31,6 +36,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
   void initState() {
     super.initState();
     enemyStats = {};
+    print('SCENARIOLEVEL IN ENEMY PICKER');
+    print(scenarioLevel);
     // I need to make an object that will store all the data from each enemy type
     // could be different objects for each enemy type or one object with all
     // health and status effects
@@ -78,6 +85,7 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                   context,
                                   MaterialPageRoute(builder: (context) {
                                     return EnemyStats(
+                                        scenarioLevel,
                                         newJson[enemyNames[0]],
                                         enemyNames[0],
                                         enemyStats,
@@ -119,6 +127,7 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                   context,
                                   MaterialPageRoute(builder: (context) {
                                     return EnemyStats(
+                                        scenarioLevel,
                                         newJson[enemyNames[1]],
                                         enemyNames[1],
                                         enemyStats,

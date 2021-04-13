@@ -7,6 +7,12 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 class EnemyTypes extends StatefulWidget {
+  var scenarioLevel;
+
+  EnemyTypes(scenarioLevel) {
+    this.scenarioLevel = scenarioLevel;
+  }
+
   @override
   _EnemyTypesState createState() => _EnemyTypesState();
 }
@@ -491,7 +497,8 @@ class _EnemyTypesState extends State<EnemyTypes> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
-                          return EnemyPicker(selectedEnemies, newJson);
+                          return EnemyPicker(
+                              widget.scenarioLevel, selectedEnemies, newJson);
                         }),
                       )
                     },

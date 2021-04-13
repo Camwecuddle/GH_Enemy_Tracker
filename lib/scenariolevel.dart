@@ -116,12 +116,17 @@ class _ScenarioLevelState extends State<ScenarioLevel> {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return EnemyTypes();
-                      }),
-                    )
+                    if (selectedLevel != null)
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return EnemyTypes(selectedLevel);
+                            },
+                          ),
+                        ),
+                      }
                   },
                 ),
               ),
