@@ -50,7 +50,7 @@ class _EnemyStatsState extends State<EnemyStats> {
     ];
   }
 
-  setAttributes() {
+  void setAttributes() {
     // parses attributes for normal and elite then sets the variables
     for (var attribute in enemyJson['level'][scenarioLevel]['normal']
         ['attributes']) {
@@ -63,12 +63,26 @@ class _EnemyStatsState extends State<EnemyStats> {
     }
   }
 
+  void createEmptyEnemies() {
+    // Creates maxNumber null objects in a list that will become enemy stats objects when their corresponding squre is selected
+    enemyStats[enemyName] = [];
+    int i = 0;
+    while (i < maxEnemies) {
+      enemyStats[i] = null;
+      i++;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     maxEnemies = enemyJson['maxEnemies'];
     statusEffects = parseStatusEffects();
     setAttributes();
+    if (enemyStats[enemyName] == null) {
+      // If this is the first time you select this enemy, initialize all the enemies to null
+      createEmptyEnemies();
+    }
   }
 
   @override
@@ -616,7 +630,7 @@ class _EnemyStatsState extends State<EnemyStats> {
           Expanded(
             flex: 2,
             child: Container(
-              // top row that will have the enemy number in the top left and health in the middle
+              // top row that will have the enemy number in the top left, health in the middle, kill button top right
               child: Row(
                 children: [
                   Expanded(
@@ -630,61 +644,82 @@ class _EnemyStatsState extends State<EnemyStats> {
                       ),
                     ),
                   ),
-                  Expanded(
-                    child: Container(
-                      // top middle box with health
-                      child: Column(
-                        // need to split it into 2 to center the health in the entire box
-                        children: [
-                          Expanded(
-                            child: Container(
-                                // top of middle box used to center the health in the box below it
-                                ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              // conceptually the center box in a grid of 9 boxes
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height: 25,
-                                    width: 25,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: AssetImage(
-                                                'assets/icons/gh_health_maroon.png'),
-                                          )),
+                  GestureDetector(
+                    onTap: () => {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return editStatsDialogue(context, number);
+                          }),
+                    },
+                    child: Expanded(
+                      child: Container(
+                        // top middle box with health
+                        child: Column(
+                          // need to split it into 2 to center the health in the entire box
+                          children: [
+                            Expanded(
+                              child: Container(
+                                  // top of middle box used to center the health in the box below it
+                                  ),
+                            ),
+                            Expanded(
+                              child: Container(
+                                // conceptually the center box in a grid of 9 boxes
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      // padding: EdgeInsets.only(left: 20),
+                                      // margin: EdgeInsets.only(right: 20),
+                                      height: 25,
+                                      width: 25,
+                                      child: Center(
+                                        child: AspectRatio(
+                                          aspectRatio: 1,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                              fit: BoxFit.fitWidth,
+                                              alignment:
+                                                  FractionalOffset.center,
+                                              image: AssetImage(
+                                                  'assets/icons/gh_health_maroon.png'),
+                                            )),
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    '$health',
-                                    style:
-                                        Theme.of(context).textTheme.bodyText2,
-                                  ),
-                                ],
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      '$health',
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
-                    child: Container(), // To center the health
+                    child: Material(
+                      color: Colors.white,
+                      child: Container(
+                        alignment: Alignment.topRight,
+                        padding: EdgeInsets.only(top: 5),
+                        // Top right box with number
+                        child: IconButton(
+                          icon: const Icon(Icons.cancel_outlined),
+                          onPressed: () {},
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -727,5 +762,60 @@ class _EnemyStatsState extends State<EnemyStats> {
         ],
       ),
     );
+  }
+
+  // This will be the dialogue pop up when an enemy is clicked, let you change health and status effects
+  editStatsDialogue(context, enemyNum) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      elevation: 10,
+      backgroundColor: Colors.white,
+      child: editStatsContent(context, enemyNum),
+    );
+  }
+
+  editStatsContent(context, enemyNum) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.all(10),
+          child: Text(
+            '$enemyName $enemyNum',
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ), // bottom part
+      ],
+    );
+    // child: Column(
+    //   children: [
+    //     Expanded(
+    //       child: Container(
+    //         child: Text(
+    //           '$enemyName $enemyNum',
+    //         ),
+    //       ),
+    //     ),
+    //     Expanded(
+    //       child: Material(
+    //         child: Row(
+    //           // Add and Subtract health
+    //           children: [
+    //             IconButton(
+    //               icon: const Icon(Icons.add),
+    //               onPressed: () {},
+    //             ),
+    //             Text('PH 2'),
+    //             IconButton(
+    //               icon: const Icon(Icons.minimize),
+    //               onPressed: () {},
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    // ),
   }
 }

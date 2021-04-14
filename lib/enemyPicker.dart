@@ -36,8 +36,10 @@ class _EnemyPickerState extends State<EnemyPicker> {
   void initState() {
     super.initState();
     enemyStats = {};
-    print('SCENARIOLEVEL IN ENEMY PICKER');
-    print(scenarioLevel);
+
+    // Make an object with each enemy name as a key, and those keys values are just null until we click on an enemy
+    // In the enemyStats page we will flush that out
+
     // I need to make an object that will store all the data from each enemy type
     // could be different objects for each enemy type or one object with all
     // health and status effects
