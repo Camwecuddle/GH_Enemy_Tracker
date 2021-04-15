@@ -35,7 +35,7 @@ class _EnemyPickerState extends State<EnemyPicker> {
   @override
   void initState() {
     super.initState();
-    enemyStats = {};
+    enemyStats = createEnemyStats();
 
     // Make an object with each enemy name as a key, and those keys values are just null until we click on an enemy
     // In the enemyStats page we will flush that out
@@ -47,8 +47,22 @@ class _EnemyPickerState extends State<EnemyPicker> {
     // also need to write functions in here that mutate the data and then pass those to the individual enemy stats pages
   }
 
-  void updateEnemyStats(enemyIndex, updatedStats) {
-    enemyStats[enemyIndex] = updatedStats;
+  Object createEnemyStats() {
+    var temp = {};
+    for (var name in enemyNames) {
+      temp[name] = [];
+      int i = 0;
+      while (i < newJson[name]['maxEnemies']) {
+        temp[name].add(null);
+        i++;
+      }
+    }
+    return temp;
+  }
+
+  // Pass this function on so that the child views can mutate the enemyStats object
+  void updateEnemyStats(name, updatedStats) {
+    enemyStats[name] = updatedStats;
   }
 
   @override

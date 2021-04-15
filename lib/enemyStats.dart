@@ -29,7 +29,6 @@ class _EnemyStatsState extends State<EnemyStats> {
   var updateEnemyStats;
   var enemyName;
   var maxEnemies;
-  var statusEffects;
   String normalAttributeString = '';
   String eliteAttributeString = '';
 
@@ -40,14 +39,6 @@ class _EnemyStatsState extends State<EnemyStats> {
     this.enemyStats = enemyStats;
     this.updateEnemyStats = updateEnemyStats;
     this.enemyName = enemyName;
-  }
-
-  List<String> parseStatusEffects() {
-    return [
-      'fire',
-      'earth',
-      'darkness',
-    ];
   }
 
   void setAttributes() {
@@ -64,7 +55,7 @@ class _EnemyStatsState extends State<EnemyStats> {
   }
 
   void createEmptyEnemies() {
-    // Creates maxNumber null objects in a list that will become enemy stats objects when their corresponding squre is selected
+    // Creates maxNumber null objects in a list that will become enemy stats objects when their corresponding square is selected
     enemyStats[enemyName] = [];
     int i = 0;
     while (i < maxEnemies) {
@@ -76,8 +67,9 @@ class _EnemyStatsState extends State<EnemyStats> {
   @override
   void initState() {
     super.initState();
+    print('OG ENEMY STATS');
+    print(enemyStats);
     maxEnemies = enemyJson['maxEnemies'];
-    statusEffects = parseStatusEffects();
     setAttributes();
     if (enemyStats[enemyName] == null) {
       // If this is the first time you select this enemy, initialize all the enemies to null
@@ -533,22 +525,18 @@ class _EnemyStatsState extends State<EnemyStats> {
                     child: Container(
                       child: Column(
                         children: [
-                          Expanded(child: makeStatBox(1, 12, statusEffects)),
+                          Expanded(child: makeStatBox(1)),
                           (maxEnemies > 2)
-                              ? Expanded(
-                                  child: makeStatBox(3, 12, statusEffects))
+                              ? Expanded(child: makeStatBox(3))
                               : SizedBox.shrink(),
                           (maxEnemies > 4)
-                              ? Expanded(
-                                  child: makeStatBox(5, 12, statusEffects))
+                              ? Expanded(child: makeStatBox(5))
                               : SizedBox.shrink(),
                           (maxEnemies > 6)
-                              ? Expanded(
-                                  child: makeStatBox(7, 12, statusEffects))
+                              ? Expanded(child: makeStatBox(7))
                               : SizedBox.shrink(),
                           (maxEnemies > 8)
-                              ? Expanded(
-                                  child: makeStatBox(9, 12, statusEffects))
+                              ? Expanded(child: makeStatBox(9))
                               : SizedBox.shrink(),
                         ],
                       ),
@@ -560,27 +548,18 @@ class _EnemyStatsState extends State<EnemyStats> {
                           child: Container(
                             child: Column(
                               children: [
-                                Expanded(
-                                    child: makeStatBox(2, 12, statusEffects)),
+                                Expanded(child: makeStatBox(2)),
                                 (maxEnemies > 3)
-                                    ? Expanded(
-                                        child:
-                                            makeStatBox(4, 12, statusEffects))
+                                    ? Expanded(child: makeStatBox(4))
                                     : SizedBox.shrink(),
                                 (maxEnemies > 5)
-                                    ? Expanded(
-                                        child:
-                                            makeStatBox(6, 12, statusEffects))
+                                    ? Expanded(child: makeStatBox(6))
                                     : SizedBox.shrink(),
                                 (maxEnemies > 7)
-                                    ? Expanded(
-                                        child:
-                                            makeStatBox(8, 12, statusEffects))
+                                    ? Expanded(child: makeStatBox(8))
                                     : SizedBox.shrink(),
                                 (maxEnemies > 9)
-                                    ? Expanded(
-                                        child:
-                                            makeStatBox(10, 12, statusEffects))
+                                    ? Expanded(child: makeStatBox(10))
                                     : SizedBox.shrink(),
                               ],
                             ),
@@ -596,10 +575,10 @@ class _EnemyStatsState extends State<EnemyStats> {
     );
   }
 
-  Widget makeStatusPicture(effect) {
+  Widget makeStatusPicture(effect, size, opacity) {
     return Container(
-      height: 20,
-      width: 20,
+      height: size,
+      width: size,
       child: Center(
         child: AspectRatio(
           aspectRatio: 1,
@@ -607,6 +586,8 @@ class _EnemyStatsState extends State<EnemyStats> {
             decoration: BoxDecoration(
                 image: DecorationImage(
               fit: BoxFit.fitWidth,
+              colorFilter: new ColorFilter.mode(
+                  Colors.white.withOpacity(opacity), BlendMode.lighten),
               alignment: FractionalOffset.center,
               image: AssetImage('assets/icons/gh_$effect.png'),
             )),
@@ -616,152 +597,228 @@ class _EnemyStatsState extends State<EnemyStats> {
     );
   }
 
-  Widget makeStatBox(number, health, effects) {
-    return Container(
-      // Each of these will display health and status effects of one enemy
-      decoration: BoxDecoration(
-        border: Border.all(
-          width: 2.0,
-          color: Color.fromRGBO(50, 50, 50, 1),
-        ),
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              // top row that will have the enemy number in the top left, health in the middle, kill button top right
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      padding: EdgeInsets.all(10),
-                      // Top right box with number
-                      child: Text(
-                        '$number',
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () => {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return editStatsDialogue(context, number);
-                          }),
-                    },
-                    child: Expanded(
-                      child: Container(
-                        // top middle box with health
-                        child: Column(
-                          // need to split it into 2 to center the health in the entire box
-                          children: [
-                            Expanded(
-                              child: Container(
-                                  // top of middle box used to center the health in the box below it
-                                  ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                // conceptually the center box in a grid of 9 boxes
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      // padding: EdgeInsets.only(left: 20),
-                                      // margin: EdgeInsets.only(right: 20),
-                                      height: 25,
-                                      width: 25,
-                                      child: Center(
-                                        child: AspectRatio(
-                                          aspectRatio: 1,
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                              fit: BoxFit.fitWidth,
-                                              alignment:
-                                                  FractionalOffset.center,
-                                              image: AssetImage(
-                                                  'assets/icons/gh_health_maroon.png'),
-                                            )),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      '$health',
-                                      style:
-                                          Theme.of(context).textTheme.bodyText2,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Material(
-                      color: Colors.white,
-                      child: Container(
-                        alignment: Alignment.topRight,
-                        padding: EdgeInsets.only(top: 5),
-                        // Top right box with number
-                        child: IconButton(
-                          icon: const Icon(Icons.cancel_outlined),
-                          onPressed: () {},
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+  Widget makeStatBox(number) {
+    return (enemyStats[enemyName][number - 1] == null)
+        ? Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 2.0,
+                color: Color.fromRGBO(50, 50, 50, 1),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              // bottom row that will have the enemy status effects
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    effects.length > 0
-                        ? makeStatusPicture(effects[0])
-                        : SizedBox.shrink(),
-                    effects.length > 1
-                        ? makeStatusPicture(effects[1])
-                        : SizedBox.shrink(),
-                    effects.length > 2
-                        ? makeStatusPicture(effects[2])
-                        : SizedBox.shrink(),
-                    effects.length > 3
-                        ? makeStatusPicture(effects[3])
-                        : SizedBox.shrink(),
-                    effects.length > 4
-                        ? makeStatusPicture(effects[4])
-                        : SizedBox.shrink(),
-                    effects.length > 5
-                        ? makeStatusPicture(effects[5])
-                        : SizedBox.shrink(),
-                    effects.length > 6
-                        ? makeStatusPicture(effects[6])
-                        : SizedBox.shrink(),
-                    effects.length > 7
-                        ? makeStatusPicture(effects[7])
-                        : SizedBox.shrink(),
-                  ]),
+            child: Center(
+              child: TextButton(
+                  onPressed: () => {
+                        // ************************************************ Elite or Normal ****************************************************************************
+                        print('ENTERING DIALOGUE'),
+                        showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) {
+                              return eliteOrNormalDialogue(context, number);
+                            }),
+                      },
+                  child:
+                      Text('Spawn', style: Theme.of(context).textTheme.button)),
             ),
-          ),
-        ],
-      ),
-    );
+          )
+        : Container(
+            // Each of these will display health and status effects of one enemy
+            decoration: BoxDecoration(
+              border: Border.all(
+                width: 2.0,
+                color: Color.fromRGBO(50, 50, 50, 1),
+              ),
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    // top row that will have the enemy number in the top left, health in the middle, kill button top right
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.all(10),
+                            // Top right box with number
+                            child: Text(
+                              '$number',
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () => {
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return editStatsDialogue(context, number);
+                                }),
+                          },
+                          child: Expanded(
+                            child: Container(
+                              // top middle box with health
+                              child: Column(
+                                // need to split it into 2 to center the health in the entire box
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                        // top of middle box used to center the health in the box below it
+                                        ),
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      // conceptually the center box in a grid of 9 boxes
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            // padding: EdgeInsets.only(left: 20),
+                                            // margin: EdgeInsets.only(right: 20),
+                                            height: 25,
+                                            width: 25,
+                                            child: Center(
+                                              child: AspectRatio(
+                                                aspectRatio: 1,
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                    fit: BoxFit.fitWidth,
+                                                    alignment:
+                                                        FractionalOffset.center,
+                                                    image: AssetImage(
+                                                        'assets/icons/gh_health_maroon.png'),
+                                                  )),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            "${enemyStats[enemyName][number - 1]['health']}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Material(
+                            color: Colors.white,
+                            child: Container(
+                              alignment: Alignment.topRight,
+                              padding: EdgeInsets.only(top: 5),
+                              // Top right box with number
+                              child: IconButton(
+                                icon: const Icon(Icons.cancel_outlined),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    // bottom row that will have the enemy status effects
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                0
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][0],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                1
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][1],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                2
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][2],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                3
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][3],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                4
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][4],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                5
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][5],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                6
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][6],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                        enemyStats[enemyName][number - 1]['statusEffects']
+                                    .length >
+                                7
+                            ? makeStatusPicture(
+                                enemyStats[enemyName][number - 1]
+                                    ['statusEffects'][7],
+                                20.0,
+                                0.0)
+                            : SizedBox.shrink(),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
   }
 
   // This will be the dialogue pop up when an enemy is clicked, let you change health and status effects
@@ -777,45 +834,171 @@ class _EnemyStatsState extends State<EnemyStats> {
   }
 
   editStatsContent(context, enemyNum) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(10),
-          child: Text(
-            '$enemyName $enemyNum',
-            style: Theme.of(context).textTheme.headline6,
+    return Container(
+      height: 400,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Text(
+              '$enemyName $enemyNum',
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ),
-        ), // bottom part
-      ],
+          Container(
+            padding: EdgeInsets.all(10),
+            child: Material(
+              color: Colors.white,
+              child: Container(
+                child: Row(
+                  // Add and Subtract health
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IconButton(
+                      iconSize: 30,
+                      icon: const Icon(Icons.remove),
+                      onPressed: () {},
+                    ),
+                    Text('PH 2'),
+                    IconButton(
+                      iconSize: 30,
+                      icon: const Icon(Icons.add),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                makeStatusPicture('immobilize', 40.0, .8),
+                SizedBox(width: 20),
+                makeStatusPicture('poison', 40.0, .8),
+                SizedBox(width: 20),
+                makeStatusPicture('wound', 40.0, .8),
+                SizedBox(width: 20),
+                makeStatusPicture('stun', 40.0, .8),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                makeStatusPicture('disarm', 40.0, .8),
+                SizedBox(width: 20),
+                makeStatusPicture('invisible', 40.0, .8),
+                SizedBox(width: 20),
+                makeStatusPicture('strengthen', 40.0, .8),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              // Add and Subtract health
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () => {
+                    Navigator.of(context).pop(),
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => {},
+                  child: Text(
+                    'Confirm',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
-    // child: Column(
-    //   children: [
-    //     Expanded(
-    //       child: Container(
-    //         child: Text(
-    //           '$enemyName $enemyNum',
-    //         ),
-    //       ),
-    //     ),
-    //     Expanded(
-    //       child: Material(
-    //         child: Row(
-    //           // Add and Subtract health
-    //           children: [
-    //             IconButton(
-    //               icon: const Icon(Icons.add),
-    //               onPressed: () {},
-    //             ),
-    //             Text('PH 2'),
-    //             IconButton(
-    //               icon: const Icon(Icons.minimize),
-    //               onPressed: () {},
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // ),
+  }
+
+  // This will be the dialogue pop up when an enemy is clicked, let you change health and status effects
+  eliteOrNormalDialogue(context, enemyNum) {
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      elevation: 10,
+      backgroundColor: Colors.white,
+      child: eliteOrNormalContent(context, enemyNum),
+    );
+  }
+
+  eliteOrNormalContent(context, enemyNum) {
+    return Container(
+      height: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          TextButton(
+            onPressed: () => {
+              super.setState(() {
+                enemyStats[enemyName][enemyNum - 1] = {
+                  'health': enemyJson['level'][scenarioLevel]['elite']
+                      ['health'],
+                  'statusEffects': []
+                };
+                updateEnemyStats(
+                    enemyName,
+                    enemyStats[
+                        enemyName]); // Update the parent widget so we keep the data when we pop this page
+              }),
+              print(enemyStats),
+              Navigator.of(context).pop(),
+            },
+            child: Text(
+              'Elite',
+              style: TextStyle(
+                  fontSize: 20, color: Color.fromRGBO(218, 165, 32, 1)),
+            ),
+          ),
+          TextButton(
+            onPressed: () => {
+              super.setState(() {
+                enemyStats[enemyName][enemyNum - 1] = {
+                  'health': enemyJson['level'][scenarioLevel]['normal']
+                      ['health'],
+                  'statusEffects': []
+                };
+                updateEnemyStats(
+                    enemyName,
+                    enemyStats[
+                        enemyName]); // Update the parent widget so we keep the data when we pop this page
+              }),
+              print(enemyStats),
+              Navigator.of(context).pop(),
+            },
+            child: Text(
+              'Normal',
+              style: TextStyle(fontSize: 20, color: Colors.black),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

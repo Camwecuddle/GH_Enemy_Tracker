@@ -53,6 +53,11 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 22,
           ),
+          button: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),
         ),
 
         buttonTheme: ButtonThemeData(),
