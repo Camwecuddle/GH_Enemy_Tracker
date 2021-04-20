@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'dart:convert';
 
 class EnemyStats extends StatefulWidget {
   var scenarioLevel;
@@ -31,6 +32,7 @@ class _EnemyStatsState extends State<EnemyStats> {
   var maxEnemies;
   String normalAttributeString = '';
   String eliteAttributeString = '';
+  var tempStats; // Holds the new stats we mess around with in the dialogues
 
   _EnemyStatsState(
       scenarioLevel, enemyJson, enemyName, enemyStats, updateEnemyStats) {
@@ -645,18 +647,38 @@ class _EnemyStatsState extends State<EnemyStats> {
                             // Top right box with number
                             child: Text(
                               '$number',
-                              style: Theme.of(context).textTheme.headline4,
+                              style: (enemyStats[enemyName][number - 1]
+                                      ['elite'])
+                                  ? TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.none,
+                                      color: Color.fromRGBO(218, 165, 32, 1))
+                                  : TextStyle(
+                                      fontSize: 40,
+                                      fontWeight: FontWeight.w500,
+                                      decoration: TextDecoration.none,
+                                      color: Colors.black),
                             ),
                           ),
                         ),
                         GestureDetector(
                           onTap: () => {
+                            // I'm hoping this is outside the dialogue so it doesn't run again when we set state of dialogue
+                            tempStats = json.decode(
+                                json.encode(enemyStats[enemyName][number - 1])),
+                            print('Outside the dialogue tempStats'),
+                            print(tempStats),
                             showDialog(
                                 context: context,
                                 barrierDismissible: false,
-                                builder: (BuildContext context) {
-                                  return editStatsDialogue(context, number);
-                                }),
+                                builder: (context) {
+                                  return StatefulBuilder(
+                                      builder: (context, setState) {
+                                    return editStatsDialogue(
+                                        context, setState, number, tempStats);
+                                  });
+                                })
                           },
                           child: Expanded(
                             child: Container(
@@ -822,18 +844,21 @@ class _EnemyStatsState extends State<EnemyStats> {
   }
 
   // This will be the dialogue pop up when an enemy is clicked, let you change health and status effects
-  editStatsDialogue(context, enemyNum) {
+  editStatsDialogue(context, setState, enemyNum, tempStats) {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
       elevation: 10,
       backgroundColor: Colors.white,
-      child: editStatsContent(context, enemyNum),
+      child: editStatsContent(context, setState, enemyNum, tempStats),
     );
   }
 
-  editStatsContent(context, enemyNum) {
+  editStatsContent(context, setState, enemyNum, tempStats) {
+    print('Did tempStats get reset?');
+    print(tempStats);
+
     return Container(
       height: 400,
       child: Column(
@@ -859,13 +884,27 @@ class _EnemyStatsState extends State<EnemyStats> {
                     IconButton(
                       iconSize: 30,
                       icon: const Icon(Icons.remove),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          if (tempStats['health'] > 0) {
+                            tempStats['health'] = tempStats['health'] - 1;
+                          }
+                        });
+                      },
                     ),
-                    Text('PH 2'),
+                    Text("${tempStats['health']}"),
                     IconButton(
                       iconSize: 30,
                       icon: const Icon(Icons.add),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          tempStats['health'] = tempStats['health'] + 1;
+                          print('newStats');
+                          print(tempStats);
+                          print('realStats');
+                          print(enemyStats[enemyName][enemyNum - 1]);
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -876,7 +915,19 @@ class _EnemyStatsState extends State<EnemyStats> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                makeStatusPicture('immobilize', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('immobilize'))
+                            {tempStats['statusEffects'].remove('immobilize')}
+                          else
+                            {tempStats['statusEffects'].add('immobilize')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('immobilize'))
+                      ? makeStatusPicture('immobilize', 40.0, 0.0)
+                      : makeStatusPicture('immobilize', 40.0, .8),
+                ),
                 SizedBox(width: 20),
                 makeStatusPicture('poison', 40.0, .8),
                 SizedBox(width: 20),
@@ -905,7 +956,8 @@ class _EnemyStatsState extends State<EnemyStats> {
               children: [
                 TextButton(
                   onPressed: () => {
-                    Navigator.of(context).pop(),
+                    Navigator.of(context)
+                        .pop(), // Close the dialogue without updating the stats
                   },
                   child: Text(
                     'Cancel',
@@ -917,7 +969,14 @@ class _EnemyStatsState extends State<EnemyStats> {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => {},
+                  onPressed: () => {
+                    super.setState(() {
+                      // Update the layout of the parent widget
+                      enemyStats[enemyName][enemyNum - 1] =
+                          tempStats; // Actually update the stats in the object
+                    }),
+                    Navigator.pop(context),
+                  },
                   child: Text(
                     'Confirm',
                     style: TextStyle(
@@ -960,12 +1019,10 @@ class _EnemyStatsState extends State<EnemyStats> {
                 enemyStats[enemyName][enemyNum - 1] = {
                   'health': enemyJson['level'][scenarioLevel]['elite']
                       ['health'],
-                  'statusEffects': []
+                  'statusEffects': [],
+                  'elite': true
                 };
-                updateEnemyStats(
-                    enemyName,
-                    enemyStats[
-                        enemyName]); // Update the parent widget so we keep the data when we pop this page
+                updateEnemyStats(enemyName, enemyStats[enemyName]);
               }),
               print(enemyStats),
               Navigator.of(context).pop(),
@@ -982,12 +1039,10 @@ class _EnemyStatsState extends State<EnemyStats> {
                 enemyStats[enemyName][enemyNum - 1] = {
                   'health': enemyJson['level'][scenarioLevel]['normal']
                       ['health'],
-                  'statusEffects': []
+                  'statusEffects': [],
+                  'elite': false
                 };
-                updateEnemyStats(
-                    enemyName,
-                    enemyStats[
-                        enemyName]); // Update the parent widget so we keep the data when we pop this page
+                updateEnemyStats(enemyName, enemyStats[enemyName]);
               }),
               print(enemyStats),
               Navigator.of(context).pop(),

@@ -123,7 +123,8 @@ class _EnemyPickerState extends State<EnemyPicker> {
                                         fit: BoxFit.fitWidth,
                                         alignment: FractionalOffset.center,
                                         image: NetworkImage(
-                                            newJson[enemyNames[0]]['picture']),
+                                          newJson[enemyNames[0]]['picture'],
+                                        ),
                                       )),
                                     ),
                                   ),

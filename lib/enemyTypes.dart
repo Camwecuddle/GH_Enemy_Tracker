@@ -22,6 +22,7 @@ class _EnemyTypesState extends State<EnemyTypes> {
   var parsedEnemyData;
   var enemyData;
   var newJson;
+  var enemyNames;
 
   int num = 0;
 
@@ -42,10 +43,15 @@ class _EnemyTypesState extends State<EnemyTypes> {
     });
   }
 
+  // Here's the plan, parse the names at the start, do that while the page is loading in init state
+  // now we start the page with the names and we make a listView of future builders for the imageUrls so they each load individually
+
   void initState() {
     super.initState();
     selectedEnemies = [];
     enemyData = loadJsonData();
+    // Or maybe the problem is that I do this in init state so now my future builder is waiting for something that I already loaded? and it
+    // just doesn't work right?
   }
 
   buildEnemyJson() {
@@ -55,8 +61,6 @@ class _EnemyTypesState extends State<EnemyTypes> {
       newJson[enemyName] = this.parsedEnemyData[0][enemyName];
       // newJson.add({enemyName: this.parsedEnemyData[0][enemyName]});
     });
-    print('NEWJSON');
-    print(newJson);
     return newJson;
   }
 
@@ -405,7 +409,33 @@ class _EnemyTypesState extends State<EnemyTypes> {
                     ),
                     Expanded(
                       child: Container(
-                        // margin: EdgeInsets.only(left: 20),
+                        // child: FutureBuilder(
+                        //     future: getNamesFromJson(),
+                        //     builder: (context, snapshot) {
+                        //       if (snapshot.data != null) {
+                        //         print('SNAPSHOT');
+                        //         print(snapshot.data);
+                        //         print(snapshot.data[1]['smallMonstersList']
+                        //             [snapshot.data[0][0]]['picture']);
+                        //         return ListView.builder(
+                        //           itemBuilder: (_, index) => Center(
+                        //             child: FadeInImage(
+                        //               width: 200,
+                        //               height: 200,
+                        //               placeholder: AssetImage(
+                        //                   'assets/icons/gh_poison.png'),
+                        //               image: NetworkImage(
+                        //                   'https://cdn.shopify.com/s/files/1/0281/0173/8555/files/City-Guard-214x300.jpg'),
+                        //               fit: BoxFit.cover,
+                        //             ),
+                        //           ),
+                        //         );
+                        //       } else {
+                        //         return CircularProgressIndicator(); // Empty container because parsing the names should never take long
+                        //       }
+                        //     }),
+
+                        margin: EdgeInsets.only(left: 20),
 
                         child: FutureBuilder(
                             future: enemyData,
