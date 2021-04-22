@@ -67,335 +67,455 @@ class _EnemyPickerState extends State<EnemyPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.only(left: 30, top: 50),
-              alignment: Alignment.topLeft,
-              child: Text(
-                'Code: ',
-                style: Theme.of(context).textTheme.headline2,
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              padding: EdgeInsets.all(0),
-              // color: Colors.red[200],
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      (enemyNames.length >
-                              0) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return EnemyStats(
-                                        scenarioLevel,
-                                        newJson[enemyNames[0]],
-                                        enemyNames[0],
-                                        enemyStats,
-                                        updateEnemyStats);
-                                  }),
-                                )
-                              },
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                          newJson[enemyNames[0]]['picture'],
-                                        ),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                      (enemyNames.length >
-                              1) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return EnemyStats(
-                                        scenarioLevel,
-                                        newJson[enemyNames[1]],
-                                        enemyNames[1],
-                                        enemyStats,
-                                        updateEnemyStats);
-                                  }),
-                                )
-                              },
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[1]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      (enemyNames.length >
-                              2) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[2]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                      (enemyNames.length >
-                              3) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[3]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      (enemyNames.length >
-                              4) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[4]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                      (enemyNames.length >
-                              5) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[5]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      (enemyNames.length >
-                              6) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[6]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                      (enemyNames.length >
-                              7) // If selected enemies at 0 is not null show the picture
-                          ? GestureDetector(
-                              onTap: () => {},
-                              child: Container(
-                                // padding: EdgeInsets.only(left: 20),
-                                // margin: EdgeInsets.only(right: 20),
-                                height: MediaQuery.of(context).size.width * .35,
-                                width: MediaQuery.of(context).size.width * .35,
-                                child: Center(
-                                  child: AspectRatio(
-                                    aspectRatio: 1,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                        fit: BoxFit.fitWidth,
-                                        alignment: FractionalOffset.center,
-                                        image: NetworkImage(
-                                            newJson[enemyNames[7]]['picture']),
-                                      )),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            )
-                          : Image.network(
-                              '',
-                              height: MediaQuery.of(context).size.width * .35,
-                              width: MediaQuery.of(context).size.width * .35,
-                            ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              // color: Colors.blue[300],
-              child: Center(
-                child: TextButton(
-                  child: Text(
-                    'Done',
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                  onPressed: () => {
-                    Navigator.of(context).popUntil((route) => route.isFirst),
-                  },
+    return WillPopScope(
+      // Stop scrolling to last page
+      onWillPop: () async {
+        return false;
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                padding: EdgeInsets.only(left: 30, top: 50),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Code: ',
+                  style: Theme.of(context).textTheme.headline2,
                 ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 5,
+              child: Container(
+                padding: EdgeInsets.all(0),
+                // color: Colors.red[200],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        (enemyNames.length >
+                                0) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[0]],
+                                          enemyNames[0],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                            newJson[enemyNames[0]]['picture'],
+                                          ),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                        (enemyNames.length >
+                                1) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[1]],
+                                          enemyNames[1],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[1]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        (enemyNames.length >
+                                2) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[2]],
+                                          enemyNames[2],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[2]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                        (enemyNames.length >
+                                3) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[3]],
+                                          enemyNames[3],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[3]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        (enemyNames.length >
+                                4) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[4]],
+                                          enemyNames[4],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[4]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                        (enemyNames.length >
+                                5) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[5]],
+                                          enemyNames[5],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[5]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        (enemyNames.length >
+                                6) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[6]],
+                                          enemyNames[6],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[6]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                        (enemyNames.length >
+                                7) // If selected enemies at 0 is not null show the picture
+                            ? GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return EnemyStats(
+                                          scenarioLevel,
+                                          newJson[enemyNames[7]],
+                                          enemyNames[7],
+                                          enemyStats,
+                                          updateEnemyStats);
+                                    }),
+                                  )
+                                },
+                                child: Container(
+                                  // padding: EdgeInsets.only(left: 20),
+                                  // margin: EdgeInsets.only(right: 20),
+                                  height:
+                                      MediaQuery.of(context).size.width * .35,
+                                  width:
+                                      MediaQuery.of(context).size.width * .35,
+                                  child: Center(
+                                    child: AspectRatio(
+                                      aspectRatio: 1,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                          fit: BoxFit.fitWidth,
+                                          alignment: FractionalOffset.center,
+                                          image: NetworkImage(
+                                              newJson[enemyNames[7]]
+                                                  ['picture']),
+                                        )),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                '',
+                                height: MediaQuery.of(context).size.width * .35,
+                                width: MediaQuery.of(context).size.width * .35,
+                              ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                // color: Colors.blue[300],
+                child: Center(
+                  child: TextButton(
+                    child: Text(
+                      'Done',
+                      style: Theme.of(context).textTheme.headline3,
+                    ),
+                    onPressed: () => {
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Quit Game?'),
+                          content: Text('Game data will be lost.'),
+                          actions: [
+                            FlatButton(
+                              onPressed: () => {Navigator.of(context).pop()},
+                              child: Text('No'),
+                            ),
+                            FlatButton(
+                              onPressed: () => {
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst),
+                              },
+                              child: Text('Yes'),
+                            )
+                          ],
+                        ),
+                      )
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -84,311 +84,270 @@ class _EnemyTypesState extends State<EnemyTypes> {
             Expanded(
               flex: 2,
               child: Container(
-                  padding: EdgeInsets.all(0),
                   // color: Colors.red[200],
                   child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          (selectedEnemies.length >
-                                  0) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[0])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[0]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
+                      (selectedEnemies.length >
+                              0) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[0])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[0]]['picture']),
+                                      )),
                                     ),
                                   ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
                                 ),
-                          (selectedEnemies.length >
-                                  1) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[1])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[1]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              1) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[1])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[1]]['picture']),
+                                      )),
                                     ),
                                   ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
                                 ),
-                          (selectedEnemies.length >
-                                  2) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[2])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[2]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              2) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[2])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[2]]['picture']),
+                                      )),
                                     ),
                                   ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
                                 ),
-                          (selectedEnemies.length >
-                                  3) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[3])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[3]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              3) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[3])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[3]]['picture']),
+                                      )),
                                     ),
                                   ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
                                 ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          (selectedEnemies.length >
-                                  4) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[4])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[4]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
-                                ),
-                          (selectedEnemies.length >
-                                  5) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[5])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[5]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
-                                ),
-                          (selectedEnemies.length >
-                                  6) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[6])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[6]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
-                                ),
-                          (selectedEnemies.length >
-                                  7) // If selected enemies at 0 is not null show the picture
-                              ? GestureDetector(
-                                  onTap: () =>
-                                      {removeEnemy(selectedEnemies[7])},
-                                  child: Container(
-                                    // padding: EdgeInsets.only(left: 20),
-                                    // margin: EdgeInsets.only(right: 20),
-                                    height:
-                                        MediaQuery.of(context).size.width * .2,
-                                    width:
-                                        MediaQuery.of(context).size.width * .2,
-                                    child: Center(
-                                      child: AspectRatio(
-                                        aspectRatio: 1,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.fitWidth,
-                                            alignment: FractionalOffset.center,
-                                            image: NetworkImage(
-                                                this.parsedEnemyData[0]
-                                                        [selectedEnemies[7]]
-                                                    ['picture']),
-                                          )),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Image.network(
-                                  '',
-                                  height:
-                                      MediaQuery.of(context).size.width * .2,
-                                  width: MediaQuery.of(context).size.width * .2,
-                                ),
-                        ],
-                      ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
                     ],
-                  )),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      (selectedEnemies.length >
+                              4) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[4])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[4]]['picture']),
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              5) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[5])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[5]]['picture']),
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              6) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[6])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[6]]['picture']),
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                      (selectedEnemies.length >
+                              7) // If selected enemies at 0 is not null show the picture
+                          ? GestureDetector(
+                              onTap: () => {removeEnemy(selectedEnemies[7])},
+                              child: Container(
+                                // padding: EdgeInsets.only(left: 20),
+                                // margin: EdgeInsets.only(right: 20),
+                                height: MediaQuery.of(context).size.width * .2,
+                                width: MediaQuery.of(context).size.width * .2,
+                                child: Center(
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                        fit: BoxFit.fitWidth,
+                                        alignment: FractionalOffset.center,
+                                        image: NetworkImage(this
+                                                .parsedEnemyData[0]
+                                            [selectedEnemies[7]]['picture']),
+                                      )),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Image.network(
+                              '',
+                              height: MediaQuery.of(context).size.width * .2,
+                              width: MediaQuery.of(context).size.width * .2,
+                            ),
+                    ],
+                  ),
+                ],
+              )),
             ),
             Expanded(
               flex: 3,
@@ -400,7 +359,6 @@ class _EnemyTypesState extends State<EnemyTypes> {
                       margin: EdgeInsets.only(left: 20, right: 20),
                       child: TextField(
                         onChanged: (input) => {},
-                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Search',

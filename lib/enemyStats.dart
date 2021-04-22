@@ -99,8 +99,25 @@ class _EnemyStatsState extends State<EnemyStats> {
                         child: Row(
                           // enemy name and back button
                           children: [
-                            Expanded(child: Container() // Back button
+                            Expanded(
+                              // Back button
+                              child: Material(
+                                color: Color.fromRGBO(50, 50, 50, 1),
+                                child: Container(
+                                  alignment: Alignment.bottomCenter,
+                                  padding: EdgeInsets.only(top: 5),
+                                  // Top right box with number
+                                  child: IconButton(
+                                    color: Colors.white,
+                                    icon: const Icon(
+                                        Icons.arrow_back_ios_rounded),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
                                 ),
+                              ),
+                            ),
                             Expanded(
                                 flex: 5,
                                 child: Container(
@@ -329,7 +346,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                                   Container(
                                     width: 70,
                                     height: 10,
-                                    color: Colors.yellow[600],
+                                    color: Color.fromRGBO(218, 165, 32, 1),
                                   ),
                                   Container(
                                     child: Row(
@@ -521,6 +538,7 @@ class _EnemyStatsState extends State<EnemyStats> {
           Expanded(
             flex: 2,
             child: Container(
+              color: Color.fromRGBO(50, 50, 50, 1),
               child: Row(
                 children: [
                   Expanded(
@@ -603,10 +621,11 @@ class _EnemyStatsState extends State<EnemyStats> {
     return (enemyStats[enemyName][number - 1] == null)
         ? Container(
             decoration: BoxDecoration(
-              border: Border.all(
-                width: 2.0,
-                color: Color.fromRGBO(50, 50, 50, 1),
-              ),
+              color: Color.fromRGBO(50, 50, 50, 1),
+              // border: Border.all(
+              //   width: 2.0,
+              //   color: Color.fromRGBO(50, 50, 50, 1),
+              // ),
             ),
             child: Center(
               child: TextButton(
@@ -620,13 +639,17 @@ class _EnemyStatsState extends State<EnemyStats> {
                               return eliteOrNormalDialogue(context, number);
                             }),
                       },
-                  child:
-                      Text('Spawn', style: Theme.of(context).textTheme.button)),
+                  child: Text('Spawn $number',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ))),
             ),
           )
         : Container(
             // Each of these will display health and status effects of one enemy
             decoration: BoxDecoration(
+              color: Colors.white,
               border: Border.all(
                 width: 2.0,
                 color: Color.fromRGBO(50, 50, 50, 1),
@@ -746,7 +769,11 @@ class _EnemyStatsState extends State<EnemyStats> {
                               // Top right box with number
                               child: IconButton(
                                 icon: const Icon(Icons.cancel_outlined),
-                                onPressed: () {},
+                                onPressed: () {
+                                  setState(() {
+                                    enemyStats[enemyName][number - 1] = null;
+                                  });
+                                },
                               ),
                             ),
                           ),
@@ -768,7 +795,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][0],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -777,7 +804,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][1],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -786,7 +813,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][2],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -795,7 +822,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][3],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -804,7 +831,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][4],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -813,7 +840,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][5],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                         enemyStats[enemyName][number - 1]['statusEffects']
@@ -822,16 +849,7 @@ class _EnemyStatsState extends State<EnemyStats> {
                             ? makeStatusPicture(
                                 enemyStats[enemyName][number - 1]
                                     ['statusEffects'][6],
-                                20.0,
-                                0.0)
-                            : SizedBox.shrink(),
-                        enemyStats[enemyName][number - 1]['statusEffects']
-                                    .length >
-                                7
-                            ? makeStatusPicture(
-                                enemyStats[enemyName][number - 1]
-                                    ['statusEffects'][7],
-                                20.0,
+                                26.0,
                                 0.0)
                             : SizedBox.shrink(),
                       ],
@@ -929,11 +947,47 @@ class _EnemyStatsState extends State<EnemyStats> {
                       : makeStatusPicture('immobilize', 40.0, .8),
                 ),
                 SizedBox(width: 20),
-                makeStatusPicture('poison', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('poison'))
+                            {tempStats['statusEffects'].remove('poison')}
+                          else
+                            {tempStats['statusEffects'].add('poison')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('poison'))
+                      ? makeStatusPicture('poison', 40.0, 0.0)
+                      : makeStatusPicture('poison', 40.0, .8),
+                ),
                 SizedBox(width: 20),
-                makeStatusPicture('wound', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('wound'))
+                            {tempStats['statusEffects'].remove('wound')}
+                          else
+                            {tempStats['statusEffects'].add('wound')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('wound'))
+                      ? makeStatusPicture('wound', 40.0, 0.0)
+                      : makeStatusPicture('wound', 40.0, .8),
+                ),
                 SizedBox(width: 20),
-                makeStatusPicture('stun', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('stun'))
+                            {tempStats['statusEffects'].remove('stun')}
+                          else
+                            {tempStats['statusEffects'].add('stun')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('stun'))
+                      ? makeStatusPicture('stun', 40.0, 0.0)
+                      : makeStatusPicture('stun', 40.0, .8),
+                ),
               ],
             ),
           ),
@@ -941,11 +995,47 @@ class _EnemyStatsState extends State<EnemyStats> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                makeStatusPicture('disarm', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('disarm'))
+                            {tempStats['statusEffects'].remove('disarm')}
+                          else
+                            {tempStats['statusEffects'].add('disarm')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('disarm'))
+                      ? makeStatusPicture('disarm', 40.0, 0.0)
+                      : makeStatusPicture('disarm', 40.0, .8),
+                ),
                 SizedBox(width: 20),
-                makeStatusPicture('invisible', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('invisible'))
+                            {tempStats['statusEffects'].remove('invisible')}
+                          else
+                            {tempStats['statusEffects'].add('invisible')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('invisible'))
+                      ? makeStatusPicture('invisible', 40.0, 0.0)
+                      : makeStatusPicture('invisible', 40.0, .8),
+                ),
                 SizedBox(width: 20),
-                makeStatusPicture('strengthen', 40.0, .8),
+                GestureDetector(
+                  onTap: () => {
+                    setState(() => {
+                          if (tempStats['statusEffects'].contains('strengthen'))
+                            {tempStats['statusEffects'].remove('strengthen')}
+                          else
+                            {tempStats['statusEffects'].add('strengthen')}
+                        })
+                  },
+                  child: (tempStats['statusEffects'].contains('strengthen'))
+                      ? makeStatusPicture('strengthen', 40.0, 0.0)
+                      : makeStatusPicture('strengthen', 40.0, .8),
+                ),
               ],
             ),
           ),
