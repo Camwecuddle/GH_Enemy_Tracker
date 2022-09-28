@@ -495,17 +495,17 @@ class _EnemyPickerState extends State<EnemyPicker> {
                           title: Text('Quit Game?'),
                           content: Text('Game data will be lost.'),
                           actions: [
-                            FlatButton(
-                              onPressed: () => {Navigator.of(context).pop()},
-                              child: Text('No'),
-                            ),
-                            FlatButton(
-                              onPressed: () => {
-                                Navigator.of(context)
-                                    .popUntil((route) => route.isFirst),
-                              },
-                              child: Text('Yes'),
-                            )
+                            // FlatButton(
+                            //   onPressed: () => {Navigator.of(context).pop()},
+                            //   child: Text('No'),
+                            // ),
+                            // FlatButton(
+                            //   onPressed: () => {
+                            //     Navigator.of(context)
+                            //         .popUntil((route) => route.isFirst),
+                            //   },
+                            //   child: Text('Yes'),
+                            // )
                           ],
                         ),
                       )
